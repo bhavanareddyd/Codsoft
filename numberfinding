@@ -1,0 +1,41 @@
+import java.util.*;
+public class Numberfinding {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Random random = new Random();
+        boolean playAgain = true;
+        int totalScore = 0; 
+        System.out.println("Hello! Welcome to the Number Guessing Game");
+        while (playAgain) {
+            int randomnum = random.nextInt(100) + 1;
+            int guess = 0;
+            int attempts = 0;
+            System.out.println("I am thinking of a number between 1 to 100.");
+            System.out.println("Can you guess what it is? You have 10 attempts.");
+            while (attempts < 10) {
+                System.out.print("Enter your guess: ");
+                guess = sc.nextInt();
+                attempts++;
+                if (guess < randomnum) {
+                    System.out.println("Too low!");
+                } else if (guess > randomnum) {
+                    System.out.println("Too high!");
+                } else {
+                    System.out.println("Yahoo! You guessed it correctly... Congratulations!");
+                    totalScore += (10 - attempts + 1) * 10;
+                    break;
+                }
+            }
+            if (guess != randomnum) {
+                System.out.println("Sorry, you've used all 10 attempts. The correct number was " + randomnum + ".");
+            }
+            System.out.print("Do you want to play again? (yes/no): ");
+            String response = sc.next().toLowerCase();
+            if (!response.equals("yes")) {
+                playAgain = false;
+                System.out.println("Thank you for playing! Your final score is: " + totalScore);
+            }
+        }
+        sc.close();
+    }
+}
